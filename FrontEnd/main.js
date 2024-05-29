@@ -1,4 +1,9 @@
 
+///////////////////////////////////////////////////////////////////
+// Récupération des travaux via l'API et création des filtres    //
+///////////////////////////////////////////////////////////////////
+
+
 // 1. Initialisation des variables dans le scope globale ********************************************
 
 
@@ -153,4 +158,58 @@ getFiltered();
 
 
 
+
+
+///////////////////////////////////////////////////////////////////
+// Création de la navbar dynamique au niveau de la page d'accueil//
+///////////////////////////////////////////////////////////////////
+
+// Vérifier si l'utilisateur est connecté , en vérifiant la présence du token dans le localStorage
+const isLoggedIn = localStorage.getItem("token") !== null;
+console.log(localStorage.getItem("token"))
+
+// Après avoir reçu le token du serveur en réponse à la soumission du formulaire de connexion
+const token = "votre_token"; // Remplacez "votre_token" par le token reçu du serveur
+// Stockage du token dans le localStorage
+localStorage.setItem("token", token);
+
+// création de la navbar en JavaScript
+console.log("isLoggedIn:", isLoggedIn);
+function createNavbar(isLoggedIn) {
+    // créer les élements de la navbar
+    const navbar = document.createElement("div")
+    navbar.classList.add("navbar");
+  
+    const logo = document.createElement("i")
+    logo.classList.add("fas", "fa-pen-to-square");
+  
+    const modeEdition = document.createElement("span");
+    modeEdition.textContent = "Mode édition";
+  
+  // Ajouter les élements de la navbar
+  navbar.appendChild(logo);
+  navbar.appendChild(modeEdition);
+  
+  if (isLoggedIn) {
+    navbar.style.display = "flex";
+    console.log("Navbar should be visible");
+  } else {
+    navbar.style.display = "none"
+    console.log("Navbar should be hidden");
+  }
+  
+  // Retourner la navbar créée
+  return navbar;
+}
+  
+  
+  
+  // Sélectionner le conteneur de la navbar
+  const navbarContainer = document.getElementById("navbarContainer");
+  
+  // Créer la navbar et l'ajouter au conteneur
+  navbarContainer.appendChild(createNavbar(isLoggedIn));
+
+
+  
 

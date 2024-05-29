@@ -29,10 +29,13 @@ form.addEventListener("submit", async (event) => {
 
       if (response.ok) {
         const data = await response.json()
-        localStorage.setItem("token",data.token);
+        console.log("Token récupéré de la réponse :", data.token);
+        localStorage.setItem("token", data.token);
+        console.log("Token stocké dans le localStorage :", localStorage.getItem("token"));
         window.location.href = "./index.html"; // Redirige vers la page d'accueil en cas de succès
       } else {
-        document.getElementById("error-message").style.display = "block";
+        document.getElementById("error-message").textContent = "Informations d'identification incorrectes.";
+        document.getElementById("error-message").style = "display: flex;justify-content: center; margin-bottom: 35px; color: red; font-weight: bold;";
       }
 // 5. Gestion des erreurs :
 
@@ -47,3 +50,8 @@ form.addEventListener("submit", async (event) => {
 //   } catch (error) {
 //     // Bloc de code à exécuter si une erreur se produit
 //   }
+
+
+
+
+
